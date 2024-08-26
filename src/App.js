@@ -1,7 +1,15 @@
 import React from 'react';
 
+// components
+import { ButtonCounter } from './components/ButtonCounter';
+import { ViewportSwitcher } from './components/viewportSwitcher';
+
 export default function App() {
   return (
-    <h1>Hello World</h1>
+    <div className="h-full w-full overflow-hidden">
+      <ViewportSwitcher>
+        <ButtonCounter />
+      </ViewportSwitcher>
+    </div>
   );
 }
