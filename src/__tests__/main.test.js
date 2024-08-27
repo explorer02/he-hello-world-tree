@@ -3,11 +3,40 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-test('When the user switches between viewport types, ButtonCounter state should not get reset', async () => {
+const getClickCounterValue = () =>
+  screen.getByTestId('buttonClickedCount').textContent.split(': ')[1];
+
+const getViewportButtons = () => ({
+  desktopViewportButton: screen.getByTestId('viewportSwitcherDESKTOP'),
+  mobileViewportButton: screen.getByTestId('viewportSwitcherMOBILE'),
+});
+
+test('App should initially start with click counter value as 0', async () => {
   render(<App />);
 
-  const desktopViewportButton = screen.getByTestId('viewportSwitcherDESKTOP');
-  const mobileViewportButton = screen.getByTestId('viewportSwitcherMOBILE');
+  expect(getClickCounterValue()).toBe(0);
+});
+
+test('When the user switches between viewport types, ButtonCounter state should not get reset #1', async () => {
+  render(<App />);
+
+  const { desktopViewportButton, mobileViewportButton } = getViewportButtons();
+
+  userEvent.click(desktopViewportButton);
+
+  userEvent.click(screen.getByTestId('incrementClickedCountButton'));
+
+  expect(getClickCounterValue()).toBe('1');
+
+  userEvent.click(mobileViewportButton);
+
+  expect(getClickCounterValue()).toBe('1');
+});
+
+test('When the user switches between viewport types, ButtonCounter state should not get reset #2', async () => {
+  render(<App />);
+
+  const { desktopViewportButton, mobileViewportButton } = getViewportButtons();
 
   userEvent.click(desktopViewportButton);
 
@@ -15,9 +44,7 @@ test('When the user switches between viewport types, ButtonCounter state should 
 
   userEvent.click(mobileViewportButton);
 
-  expect(
-    screen.getByTestId('buttonClickedCount').textContent.split(': ')[1]
-  ).toBe('1');
+  expect(getClickCounterValue()).toBe('1');
 
   userEvent.click(screen.getByTestId('incrementClickedCountButton'));
   userEvent.click(screen.getByTestId('incrementClickedCountButton'));
@@ -25,7 +52,5 @@ test('When the user switches between viewport types, ButtonCounter state should 
 
   userEvent.click(desktopViewportButton);
 
-  expect(
-    screen.getByTestId('buttonClickedCount').textContent.split(': ')[1]
-  ).toBe('4');
+  expect(getClickCounterValue()).toBe('4');
 });

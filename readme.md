@@ -1,17 +1,19 @@
 ### Problem Name
 
-FAQs
+Count Clicks!!
 
 ### Problem Statement
 
-For our FAQs screen, we need FAQ cards to be collapsible and deletable. Last FAQ will not be deletable.
+On the screen you can see a `ButtonCounter` (contains a button, upon clicking which the click counter increases) on the left and a `ViewportSwitcher` (a group of Mobile, Desktop buttons) on the right. On Switching between the viewport types, the width of the container for the `ButtonCounter` changes.
 
-FAQ Cards have already been implemented for you but its not working as expected.
+If you click to increment the button click count on the left, and then switch the viewport. You will see that the button clicked counter resets.
 
-To make it work, we have two requirements
+So, the task for this problem is that switching between the viewport type after clicking on the button counter, the counter should NOT reset.
 
-**TASK 1**: Clicking + button on card should expand it
-**TASK 2**: Clicking X button on card should delete it
+Consider the following scenario:
+**STEP 1**: Clicking `Click Me!` button on the left, increases the clicked count to 1
+**STEP 2**: Clicking on `Mobile` button on the right should change the dimensions to a mobile view
+In the new viewport view, the button clicked count should remain as 1.
 
 ## Submission Instructions
 
