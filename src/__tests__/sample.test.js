@@ -1,4 +1,6 @@
-import App from '../App';
+import { ButtonCounterTwo } from '../components/ButtonCounterTwo';
+import { ViewportSwitcher } from '../components/viewportSwitcher';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
@@ -11,8 +13,28 @@ const getViewportButtons = () => ({
   mobileViewportButton: screen.getByTestId('viewportSwitcherMOBILE'),
 });
 
+export const renderApp = () =>
+  render(
+    <ViewportSwitcher>
+      {/* ButtonCounterTwo contains the exact same code as ButtonCounter (if you did not make any changes to this) */}
+      <ButtonCounterTwo />
+    </ViewportSwitcher>
+  );
+
+beforeAll(() => {
+  jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  console.log.mockRestore();
+});
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 test('When the user switches between viewport types, ButtonCounter state should not get reset #1', async () => {
-  render(<App />);
+  renderApp();
 
   const { desktopViewportButton, mobileViewportButton } = getViewportButtons();
 
@@ -23,6 +45,8 @@ test('When the user switches between viewport types, ButtonCounter state should 
   expect(getClickCounterValue()).toBe('1');
 
   userEvent.click(mobileViewportButton);
+
+  expect(console.log).not.toHaveBeenCalled();
 
   expect(getClickCounterValue()).toBe('1');
 });

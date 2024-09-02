@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 // DO NOT MAKE ANY CHANGES TO CODE IN THIS FILE
 
-const ButtonCounter = () => {
+const ButtonCounterTwo = () => {
   const [clickedCount, setClickedCount] = useState(0);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const ButtonCounter = () => {
   );
 };
 
-export { ButtonCounter };
+export { ButtonCounterTwo };
